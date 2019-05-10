@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="667d43e311d842b8a7ec42041e716b18" Name="Diagram1">
+        <EntityTypeShape EntityType="tiendaModel.CATEGORIAS" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="tiendaModel.DOMINIOS" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="tiendaModel.FABRICANTES" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="tiendaModel.PERSONAS" Width="1.5" PointX="0.75" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="tiendaModel.PRODUCTOS" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="tiendaModel.VENTA_PRODUCTOS" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="tiendaModel.VENTAS" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <AssociationConnector Association="tiendaModel.FK__CATEGORIA__ID_CA__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="tiendaModel.FK__PRODUCTOS__ID_CA__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="tiendaModel.FK__PRODUCTOS__ID_FA__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="tiendaModel.FK__VENTAS__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="tiendaModel.FK__VENTA_PRO__ID_PR__59063A47" ManuallyRouted="false" />
+        <AssociationConnector Association="tiendaModel.FK__VENTA_PRO__ID_VE__5812160E" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

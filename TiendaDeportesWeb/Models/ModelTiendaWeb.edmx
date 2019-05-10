@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="tiendaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CATEGORIAS">
+          <Key>
+            <PropertyRef Name="ID_CATEGORIA" />
+          </Key>
+          <Property Name="ID_CATEGORIA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOM_CATEGORIA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_CATEGORIA_PADRE" Type="int" />
+        </EntityType>
+        <EntityType Name="DOMINIOS">
+          <Key>
+            <PropertyRef Name="TIPO_DOMINIO" />
+            <PropertyRef Name="ID_DOMINIO" />
+          </Key>
+          <Property Name="TIPO_DOMINIO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_DOMINIO" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="VLR_DOMINIO" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FABRICANTES">
+          <Key>
+            <PropertyRef Name="ID_FABRICANTE" />
+          </Key>
+          <Property Name="ID_FABRICANTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOM_FABRICANTE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PAIS_FABRICANTE" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERSONAS">
+          <Key>
+            <PropertyRef Name="ID_PERSONA" />
+            <PropertyRef Name="TIPO_PERSONA" />
+          </Key>
+          <Property Name="ID_PERSONA" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="NOM_PERSONA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="APE_PERSONA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TEL_PERSONA" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="EMAIL_PERSONA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DIR_PERSONA" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CONTRASENA" Type="varchar" MaxLength="8" />
+          <Property Name="TIPO_PERSONA" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO" />
+          </Key>
+          <Property Name="ID_PRODUCTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOM_PRODUCTO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DET_PRODUCTO" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="PRECIO_ACTUAL" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="UND_DISPONIBLES" Type="int" Nullable="false" />
+          <Property Name="ID_CATEGORIA" Type="int" Nullable="false" />
+          <Property Name="ID_FABRICANTE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENTA_PRODUCTOS">
+          <Key>
+            <PropertyRef Name="ID_VENTA_PROD" />
+          </Key>
+          <Property Name="ID_VENTA_PROD" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_VENTA" Type="int" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="int" Nullable="false" />
+          <Property Name="PRECIO_VENTA" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="VENTAS">
+          <Key>
+            <PropertyRef Name="ID_VENTA" />
+          </Key>
+          <Property Name="ID_VENTA" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FECHA_VENTA" Type="date" Nullable="false" />
+          <Property Name="VLR_IVA" Type="numeric" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="ID_PERSONA" Type="numeric" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="TIPO_PERSONA" Type="varchar" MaxLength="3" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CATEGORIA__ID_CA__4BAC3F29">
+          <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="0..1" />
+          <End Role="CATEGORIAS1" Type="Self.CATEGORIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIAS">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Principal>
+            <Dependent Role="CATEGORIAS1">
+              <PropertyRef Name="ID_CATEGORIA_PADRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTOS__ID_CA__5165187F">
+          <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIAS">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTOS__ID_FA__52593CB8">
+          <End Role="FABRICANTES" Type="Self.FABRICANTES" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FABRICANTES">
+              <PropertyRef Name="ID_FABRICANTE" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="ID_FABRICANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_PRO__ID_PR__59063A47">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="VENTA_PRODUCTOS" Type="Self.VENTA_PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="VENTA_PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_PRO__ID_VE__5812160E">
+          <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="1" />
+          <End Role="VENTA_PRODUCTOS" Type="Self.VENTA_PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTAS">
+              <PropertyRef Name="ID_VENTA" />
+            </Principal>
+            <Dependent Role="VENTA_PRODUCTOS">
+              <PropertyRef Name="ID_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTAS__5535A963">
+          <End Role="PERSONAS" Type="Self.PERSONAS" Multiplicity="1" />
+          <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONAS">
+              <PropertyRef Name="ID_PERSONA" />
+              <PropertyRef Name="TIPO_PERSONA" />
+            </Principal>
+            <Dependent Role="VENTAS">
+              <PropertyRef Name="ID_PERSONA" />
+              <PropertyRef Name="TIPO_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tiendaModelStoreContainer">
+          <EntitySet Name="CATEGORIAS" EntityType="Self.CATEGORIAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DOMINIOS" EntityType="Self.DOMINIOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FABRICANTES" EntityType="Self.FABRICANTES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERSONAS" EntityType="Self.PERSONAS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTA_PRODUCTOS" EntityType="Self.VENTA_PRODUCTOS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="VENTAS" EntityType="Self.VENTAS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CATEGORIA__ID_CA__4BAC3F29" Association="Self.FK__CATEGORIA__ID_CA__4BAC3F29">
+            <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
+            <End Role="CATEGORIAS1" EntitySet="CATEGORIAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTOS__ID_CA__5165187F" Association="Self.FK__PRODUCTOS__ID_CA__5165187F">
+            <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTOS__ID_FA__52593CB8" Association="Self.FK__PRODUCTOS__ID_FA__52593CB8">
+            <End Role="FABRICANTES" EntitySet="FABRICANTES" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_PRO__ID_PR__59063A47" Association="Self.FK__VENTA_PRO__ID_PR__59063A47">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="VENTA_PRODUCTOS" EntitySet="VENTA_PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_PRO__ID_VE__5812160E" Association="Self.FK__VENTA_PRO__ID_VE__5812160E">
+            <End Role="VENTAS" EntitySet="VENTAS" />
+            <End Role="VENTA_PRODUCTOS" EntitySet="VENTA_PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTAS__5535A963" Association="Self.FK__VENTAS__5535A963">
+            <End Role="PERSONAS" EntitySet="PERSONAS" />
+            <End Role="VENTAS" EntitySet="VENTAS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="tiendaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CATEGORIAS">
+          <Key>
+            <PropertyRef Name="ID_CATEGORIA" />
+          </Key>
+          <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_CATEGORIA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_CATEGORIA_PADRE" Type="Int32" />
+          <NavigationProperty Name="CATEGORIAS1" Relationship="Self.FK__CATEGORIA__ID_CA__4BAC3F29" FromRole="CATEGORIAS" ToRole="CATEGORIAS1" />
+          <NavigationProperty Name="CATEGORIAS2" Relationship="Self.FK__CATEGORIA__ID_CA__4BAC3F29" FromRole="CATEGORIAS1" ToRole="CATEGORIAS" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK__PRODUCTOS__ID_CA__5165187F" FromRole="CATEGORIAS" ToRole="PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="DOMINIOS">
+          <Key>
+            <PropertyRef Name="TIPO_DOMINIO" />
+            <PropertyRef Name="ID_DOMINIO" />
+          </Key>
+          <Property Name="TIPO_DOMINIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_DOMINIO" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="VLR_DOMINIO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="FABRICANTES">
+          <Key>
+            <PropertyRef Name="ID_FABRICANTE" />
+          </Key>
+          <Property Name="ID_FABRICANTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_FABRICANTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PAIS_FABRICANTE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK__PRODUCTOS__ID_FA__52593CB8" FromRole="FABRICANTES" ToRole="PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="PERSONAS">
+          <Key>
+            <PropertyRef Name="ID_PERSONA" />
+            <PropertyRef Name="TIPO_PERSONA" />
+          </Key>
+          <Property Name="ID_PERSONA" Type="Decimal" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="NOM_PERSONA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="APE_PERSONA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TEL_PERSONA" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="EMAIL_PERSONA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DIR_PERSONA" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CONTRASENA" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="TIPO_PERSONA" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="VENTAS" Relationship="Self.FK__VENTAS__5535A963" FromRole="PERSONAS" ToRole="VENTAS" />
+        </EntityType>
+        <EntityType Name="PRODUCTOS">
+          <Key>
+            <PropertyRef Name="ID_PRODUCTO" />
+          </Key>
+          <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOM_PRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DET_PRODUCTO" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PRECIO_ACTUAL" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="UND_DISPONIBLES" Type="Int32" Nullable="false" />
+          <Property Name="ID_CATEGORIA" Type="Int32" Nullable="false" />
+          <Property Name="ID_FABRICANTE" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CATEGORIAS" Relationship="Self.FK__PRODUCTOS__ID_CA__5165187F" FromRole="PRODUCTOS" ToRole="CATEGORIAS" />
+          <NavigationProperty Name="FABRICANTES" Relationship="Self.FK__PRODUCTOS__ID_FA__52593CB8" FromRole="PRODUCTOS" ToRole="FABRICANTES" />
+          <NavigationProperty Name="VENTA_PRODUCTOS" Relationship="Self.FK__VENTA_PRO__ID_PR__59063A47" FromRole="PRODUCTOS" ToRole="VENTA_PRODUCTOS" />
+        </EntityType>
+        <EntityType Name="VENTA_PRODUCTOS">
+          <Key>
+            <PropertyRef Name="ID_VENTA_PROD" />
+          </Key>
+          <Property Name="ID_VENTA_PROD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_VENTA" Type="Int32" Nullable="false" />
+          <Property Name="ID_PRODUCTO" Type="Int32" Nullable="false" />
+          <Property Name="PRECIO_VENTA" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="CANTIDAD" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PRODUCTOS" Relationship="Self.FK__VENTA_PRO__ID_PR__59063A47" FromRole="VENTA_PRODUCTOS" ToRole="PRODUCTOS" />
+          <NavigationProperty Name="VENTAS" Relationship="Self.FK__VENTA_PRO__ID_VE__5812160E" FromRole="VENTA_PRODUCTOS" ToRole="VENTAS" />
+        </EntityType>
+        <EntityType Name="VENTAS">
+          <Key>
+            <PropertyRef Name="ID_VENTA" />
+          </Key>
+          <Property Name="ID_VENTA" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FECHA_VENTA" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="VLR_IVA" Type="Decimal" Precision="10" Scale="0" Nullable="false" />
+          <Property Name="ID_PERSONA" Type="Decimal" Precision="12" Scale="0" Nullable="false" />
+          <Property Name="TIPO_PERSONA" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PERSONAS" Relationship="Self.FK__VENTAS__5535A963" FromRole="VENTAS" ToRole="PERSONAS" />
+          <NavigationProperty Name="VENTA_PRODUCTOS" Relationship="Self.FK__VENTA_PRO__ID_VE__5812160E" FromRole="VENTAS" ToRole="VENTA_PRODUCTOS" />
+        </EntityType>
+        <Association Name="FK__CATEGORIA__ID_CA__4BAC3F29">
+          <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="0..1" />
+          <End Role="CATEGORIAS1" Type="Self.CATEGORIAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIAS">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Principal>
+            <Dependent Role="CATEGORIAS1">
+              <PropertyRef Name="ID_CATEGORIA_PADRE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTOS__ID_CA__5165187F">
+          <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIAS">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTOS__ID_FA__52593CB8">
+          <End Role="FABRICANTES" Type="Self.FABRICANTES" Multiplicity="1" />
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FABRICANTES">
+              <PropertyRef Name="ID_FABRICANTE" />
+            </Principal>
+            <Dependent Role="PRODUCTOS">
+              <PropertyRef Name="ID_FABRICANTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTAS__5535A963">
+          <End Role="PERSONAS" Type="Self.PERSONAS" Multiplicity="1" />
+          <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PERSONAS">
+              <PropertyRef Name="ID_PERSONA" />
+              <PropertyRef Name="TIPO_PERSONA" />
+            </Principal>
+            <Dependent Role="VENTAS">
+              <PropertyRef Name="ID_PERSONA" />
+              <PropertyRef Name="TIPO_PERSONA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_PRO__ID_PR__59063A47">
+          <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
+          <End Role="VENTA_PRODUCTOS" Type="Self.VENTA_PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Principal>
+            <Dependent Role="VENTA_PRODUCTOS">
+              <PropertyRef Name="ID_PRODUCTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VENTA_PRO__ID_VE__5812160E">
+          <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="1" />
+          <End Role="VENTA_PRODUCTOS" Type="Self.VENTA_PRODUCTOS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VENTAS">
+              <PropertyRef Name="ID_VENTA" />
+            </Principal>
+            <Dependent Role="VENTA_PRODUCTOS">
+              <PropertyRef Name="ID_VENTA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="tiendaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CATEGORIAS" EntityType="Self.CATEGORIAS" />
+          <EntitySet Name="DOMINIOS" EntityType="Self.DOMINIOS" />
+          <EntitySet Name="FABRICANTES" EntityType="Self.FABRICANTES" />
+          <EntitySet Name="PERSONAS" EntityType="Self.PERSONAS" />
+          <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" />
+          <EntitySet Name="VENTA_PRODUCTOS" EntityType="Self.VENTA_PRODUCTOS" />
+          <EntitySet Name="VENTAS" EntityType="Self.VENTAS" />
+          <AssociationSet Name="FK__CATEGORIA__ID_CA__4BAC3F29" Association="Self.FK__CATEGORIA__ID_CA__4BAC3F29">
+            <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
+            <End Role="CATEGORIAS1" EntitySet="CATEGORIAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTOS__ID_CA__5165187F" Association="Self.FK__PRODUCTOS__ID_CA__5165187F">
+            <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTOS__ID_FA__52593CB8" Association="Self.FK__PRODUCTOS__ID_FA__52593CB8">
+            <End Role="FABRICANTES" EntitySet="FABRICANTES" />
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTAS__5535A963" Association="Self.FK__VENTAS__5535A963">
+            <End Role="PERSONAS" EntitySet="PERSONAS" />
+            <End Role="VENTAS" EntitySet="VENTAS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_PRO__ID_PR__59063A47" Association="Self.FK__VENTA_PRO__ID_PR__59063A47">
+            <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
+            <End Role="VENTA_PRODUCTOS" EntitySet="VENTA_PRODUCTOS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VENTA_PRO__ID_VE__5812160E" Association="Self.FK__VENTA_PRO__ID_VE__5812160E">
+            <End Role="VENTAS" EntitySet="VENTAS" />
+            <End Role="VENTA_PRODUCTOS" EntitySet="VENTA_PRODUCTOS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="tiendaModelStoreContainer" CdmEntityContainer="tiendaEntities">
+          <EntitySetMapping Name="CATEGORIAS">
+            <EntityTypeMapping TypeName="tiendaModel.CATEGORIAS">
+              <MappingFragment StoreEntitySet="CATEGORIAS">
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+                <ScalarProperty Name="NOM_CATEGORIA" ColumnName="NOM_CATEGORIA" />
+                <ScalarProperty Name="ID_CATEGORIA_PADRE" ColumnName="ID_CATEGORIA_PADRE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DOMINIOS">
+            <EntityTypeMapping TypeName="tiendaModel.DOMINIOS">
+              <MappingFragment StoreEntitySet="DOMINIOS">
+                <ScalarProperty Name="TIPO_DOMINIO" ColumnName="TIPO_DOMINIO" />
+                <ScalarProperty Name="ID_DOMINIO" ColumnName="ID_DOMINIO" />
+                <ScalarProperty Name="VLR_DOMINIO" ColumnName="VLR_DOMINIO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FABRICANTES">
+            <EntityTypeMapping TypeName="tiendaModel.FABRICANTES">
+              <MappingFragment StoreEntitySet="FABRICANTES">
+                <ScalarProperty Name="ID_FABRICANTE" ColumnName="ID_FABRICANTE" />
+                <ScalarProperty Name="NOM_FABRICANTE" ColumnName="NOM_FABRICANTE" />
+                <ScalarProperty Name="PAIS_FABRICANTE" ColumnName="PAIS_FABRICANTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERSONAS">
+            <EntityTypeMapping TypeName="tiendaModel.PERSONAS">
+              <MappingFragment StoreEntitySet="PERSONAS">
+                <ScalarProperty Name="ID_PERSONA" ColumnName="ID_PERSONA" />
+                <ScalarProperty Name="NOM_PERSONA" ColumnName="NOM_PERSONA" />
+                <ScalarProperty Name="APE_PERSONA" ColumnName="APE_PERSONA" />
+                <ScalarProperty Name="TEL_PERSONA" ColumnName="TEL_PERSONA" />
+                <ScalarProperty Name="EMAIL_PERSONA" ColumnName="EMAIL_PERSONA" />
+                <ScalarProperty Name="DIR_PERSONA" ColumnName="DIR_PERSONA" />
+                <ScalarProperty Name="CONTRASENA" ColumnName="CONTRASENA" />
+                <ScalarProperty Name="TIPO_PERSONA" ColumnName="TIPO_PERSONA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTOS">
+            <EntityTypeMapping TypeName="tiendaModel.PRODUCTOS">
+              <MappingFragment StoreEntitySet="PRODUCTOS">
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="NOM_PRODUCTO" ColumnName="NOM_PRODUCTO" />
+                <ScalarProperty Name="DET_PRODUCTO" ColumnName="DET_PRODUCTO" />
+                <ScalarProperty Name="PRECIO_ACTUAL" ColumnName="PRECIO_ACTUAL" />
+                <ScalarProperty Name="UND_DISPONIBLES" ColumnName="UND_DISPONIBLES" />
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+                <ScalarProperty Name="ID_FABRICANTE" ColumnName="ID_FABRICANTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTA_PRODUCTOS">
+            <EntityTypeMapping TypeName="tiendaModel.VENTA_PRODUCTOS">
+              <MappingFragment StoreEntitySet="VENTA_PRODUCTOS">
+                <ScalarProperty Name="ID_VENTA_PROD" ColumnName="ID_VENTA_PROD" />
+                <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
+                <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
+                <ScalarProperty Name="PRECIO_VENTA" ColumnName="PRECIO_VENTA" />
+                <ScalarProperty Name="CANTIDAD" ColumnName="CANTIDAD" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VENTAS">
+            <EntityTypeMapping TypeName="tiendaModel.VENTAS">
+              <MappingFragment StoreEntitySet="VENTAS">
+                <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
+                <ScalarProperty Name="FECHA_VENTA" ColumnName="FECHA_VENTA" />
+                <ScalarProperty Name="VLR_IVA" ColumnName="VLR_IVA" />
+                <ScalarProperty Name="ID_PERSONA" ColumnName="ID_PERSONA" />
+                <ScalarProperty Name="TIPO_PERSONA" ColumnName="TIPO_PERSONA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
