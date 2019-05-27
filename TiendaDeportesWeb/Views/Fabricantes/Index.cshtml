@@ -1,0 +1,55 @@
+﻿@model List<TiendaDeportesWeb.Models.DTOs.FabricantesDTO>
+@{
+    ViewBag.Title = "Fabricantes";
+}
+
+<h2>Fabricantes</h2>
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" value="Nuevo"
+               onclick="document.location.href='@Url.Content("~/Fabricantes/Add")'" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Id Fabricante</th>
+                <th>Nombre Fabricante</th>
+                <th>Pais Fabricante</th>
+                <th style="text-align: center">Acciones</th>
+            </tr>
+            @foreach (var oFabricante in Model)
+            {
+            <tr>
+                <td>@oFabricante.IdFabricante</td>
+                <td>@oFabricante.NomFabricante</td>
+                <td>@oFabricante.PaisFabricante</td>
+                <td style="text-align: center">
+                    <input type="button" value="Editar" class="btn btn-default"
+                           onclick="document.location.href='@Url.Content("~/Fabricantes/Edit/?id="
+                                                           +oFabricante.IdFabricante)'" />
+                    <input type="button" value="Eliminar" class="btn btn-danger"
+                           onclick="jsDelete(@oFabricante.IdFabricante);" />
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>
+<script>
+    function jsDelete(id) {
+        if (confirm("Está seguro de eliminar este registro?")) {
+            url = "@Url.Content("~/Fabricantes/Delete")" + "/?id=" + id;
+            $.post(url, function (data){
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/Fabricantes/")"
+                } else {
+                    alert(data);
+                }
+            })
+        }
+    }
+</script>
+
