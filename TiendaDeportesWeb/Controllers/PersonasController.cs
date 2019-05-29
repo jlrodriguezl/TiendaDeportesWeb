@@ -126,5 +126,18 @@ namespace TiendaDeportesWeb.Controllers
             }
             return Redirect(Url.Content("~/Personas/"));
         }
+
+        [HttpPost]
+        public ActionResult Delete(int id, string tipoPersona)
+        {
+            using (tiendaEntities db = new tiendaEntities())
+            {
+                PERSONAS persona = db.PERSONAS.Find(id, tipoPersona);
+                db.PERSONAS.Remove(persona);
+                db.SaveChanges();
+            }
+            return Content("1");
+        }
+
     }
 }
