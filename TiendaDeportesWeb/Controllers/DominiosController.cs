@@ -52,19 +52,20 @@ namespace TiendaDeportesWeb.Controllers
             return Redirect(Url.Content("~/Dominios/"));
 
         }
-        public ActionResult Edit(string id)
+        public ActionResult Edit(string id, string tipo)
         {
             DominiosDTO model = new DominiosDTO();
             using (tiendaEntities db = new tiendaEntities())
             {
-                DOMINIOS d = new DOMINIOS();
-                d.TIPO_DOMINIO = model.TIPO_DOMINIO;
-                d.ID_DOMINIO = model.ID_DOMINIO;
-                d.VLR_DOMINIO = model.VLR_DOMINIO;
+                DOMINIOS d = db.DOMINIOS.Find(tipo, id);
+                model.TIPO_DOMINIO = d.TIPO_DOMINIO;
+                model.ID_DOMINIO = d.ID_DOMINIO;
+                model.VLR_DOMINIO = d.VLR_DOMINIO;
             }
             
             return View(model);
         }
+
         [HttpPost]
         public ActionResult Edit(DominiosDTO model)
         {
@@ -80,6 +81,17 @@ namespace TiendaDeportesWeb.Controllers
                 db.SaveChanges();
             }
             return Redirect(Url.Content("~/Dominios/"));
+        }
+        [HttpPost]
+        public ActionResult Delete(string id, string tipo)
+        {
+            using (tiendaEntities db = new tiendaEntities())
+            {
+                DOMINIOS d = db.DOMINIOS.Find(tipo, id);
+                db.DOMINIOS.Remove(d);
+                db.SaveChanges();
+            }
+            return Content("1");
         }
     }
 }

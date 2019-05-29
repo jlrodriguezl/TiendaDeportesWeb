@@ -30,15 +30,28 @@
                     <td>@oDominio.VLR_DOMINIO</td>
                     <td style="text-align: center">
                         <input type="button" value="Editar" class="btn btn-default"
-                               onclick="document.location.href='@Url.Content("~/Dominios/Edit/?id="
-                                                           +oDominio.ID_DOMINIO)'" />
-                        ||
+                               onclick="document.location.href='@Url.Content("~/Dominios/Edit/?id="+oDominio.ID_DOMINIO + "&tipo="+oDominio.TIPO_DOMINIO)'" />
+                        ||  
 
                         <input type="button" value="Eliminar" class="btn btn-danger"
-                               onclick="jsDelete(@oDominio.ID_DOMINIO);" />
+                               onclick="jsDelete('@oDominio.TIPO_DOMINIO', '@oDominio.ID_DOMINIO');" />
                     </td>
                 </tr>
             }
         </table>
     </div>
 </div>
+<script>
+    function jsDelete(tipo, id) {
+        if (confirm("Está seguro de eliminar este registro?")) {
+            url = "@Url.Content("~/Dominios/Delete")" + "/?id="+id + "&tipo="+tipo;
+            $.post(url, function (data){
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/Dominios/")"
+                } else {
+                    alert(data);
+                }
+            })
+        }
+    }
+</script>

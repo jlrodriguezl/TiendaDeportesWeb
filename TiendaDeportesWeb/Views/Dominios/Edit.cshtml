@@ -1,7 +1,40 @@
-﻿
+﻿@model TiendaDeportesWeb.Models.DTOs.DominiosDTO
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Gestionar Dominios";
 }
 
-<h2>Edit</h2>
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <!--Inicio del formulario de Inserción de datos
+    Params(1->Action, 2->Controller, 3->Method, 4->Params)
+    -->
+        @using (Html.BeginForm("Edit", "Dominios", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.LabelFor(d => d.TIPO_DOMINIO)
+            @Html.TextBoxFor(d => d.TIPO_DOMINIO, new { @class = "form-control", @readonly = "readonly" })
+
+            <br />
+            @Html.LabelFor(d => d.ID_DOMINIO)
+            @Html.TextBoxFor(d => d.ID_DOMINIO, new { @class = "form-control", @readonly = "readonly" })
+
+            <br />
+            @Html.LabelFor(d => d.VLR_DOMINIO)
+            @Html.TextBoxFor(d => d.VLR_DOMINIO, new { @class = "form-control" })
+            @Html.ValidationMessage("Valor del Dominio", new { @class = "text-danger" })
+            <br />
+
+            @Html.HiddenFor(d => d.ID_DOMINIO)
+            <div style="text-align: left">
+                <br />
+                <input type="submit" class="btn btn-success" value="Guardar" />
+                <input type="button" class="btn btn-danger" value="Cancelar"
+                       onclick="document.location.href='@Url.Content("~/Dominios/")'" />
+            </div>
+
+        }
+
+    </div>
+</div>
 
