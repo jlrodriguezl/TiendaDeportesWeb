@@ -8,12 +8,12 @@
 <div class="row">
     <div class="col-md-12">
         <!--Inicio del formulario de Inserción de datos
-    Params(1->Action, 2->Controller, 3->Method, 4->Params)
-    -->
-        @using (Html.BeginForm("Add", "Personas", FormMethod.Post, new { role = "form" }))
+        Params(1->Action, 2->Controller, 3->Method, 4->Params)
+        -->
+        @using (Html.BeginForm("Edit", "Personas", FormMethod.Post, new { role = "form" }))
         {
             @Html.LabelFor(f => f.ID_PERSONA)
-            @Html.TextBoxFor(f => f.ID_PERSONA, new { @class = "form-control"})
+            @Html.TextBoxFor(f => f.ID_PERSONA, new { @class = "form-control", @readonly = "readonly" })
             @Html.ValidationMessage("idPersona", new { @class = "text-danger" })
             <br />
 
@@ -45,7 +45,7 @@
             @Html.LabelFor(f => f.TIPO_PERSONA)
             @Html.DropDownListFor(f => Model.TIPO_PERSONA, new SelectList(Model.lstPersonas,
                     "ID_DOMINIO", "VLR_DOMINIO"),
-                    htmlAttributes: new { @class = "form-control", id = "lstPersonas" })
+                    htmlAttributes: new { @class = "form-control", id = "lstPersonas", @readonly = "readonly"})
             @Html.ValidationMessage("PaisFabricante", new { @class = "text-danger" })
 
             <div style="text-align: left">
@@ -57,4 +57,3 @@
 
     </div>
 </div>
-

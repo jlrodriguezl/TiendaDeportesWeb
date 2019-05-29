@@ -55,5 +55,76 @@ namespace TiendaDeportesWeb.Controllers
             return View(personasDto);
         }
 
+        [HttpPost]
+        public ActionResult Add(PersonasDto model)
+        {
+            //Validar los datos del formulario
+            if (!ModelState.IsValid)
+            {
+                model.lstPersonas = getPersonas();
+                return View(model);
+            }
+            //Insertar en la BD
+            using (tiendaEntities db = new tiendaEntities())
+            {
+                PERSONAS persona = new PERSONAS();
+                persona.ID_PERSONA = model.ID_PERSONA;
+                persona.NOM_PERSONA = model.NOM_PERSONA;
+                persona.APE_PERSONA = model.APE_PERSONA;
+                persona.TEL_PERSONA = model.TEL_PERSONA;
+                persona.EMAIL_PERSONA = model.EMAIL_PERSONA;
+                persona.DIR_PERSONA = model.DIR_PERSONA;
+                persona.TIPO_PERSONA = model.TIPO_PERSONA;
+
+                db.PERSONAS.Add(persona);
+                db.SaveChanges();
+            }
+            return Redirect(Url.Content("~/Personas/"));
+        }
+
+        public ActionResult Edit(int id, string tipoPersona)
+        {
+            PersonasDto model = new PersonasDto();
+            using (tiendaEntities db = new tiendaEntities())
+            {
+                PERSONAS persona = db.PERSONAS.Find(id, tipoPersona);
+                model.ID_PERSONA = persona.ID_PERSONA;
+                model.NOM_PERSONA = persona.NOM_PERSONA;
+                model.APE_PERSONA = persona.APE_PERSONA;
+                model.TEL_PERSONA = persona.TEL_PERSONA;
+                model.EMAIL_PERSONA = persona.EMAIL_PERSONA;
+                model.DIR_PERSONA = persona.DIR_PERSONA;
+                model.TIPO_PERSONA = persona.TIPO_PERSONA;
+            }
+            model.lstPersonas = getPersonas();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(PersonasDto model)
+        {
+            //Validar los datos del formulario
+            if (!ModelState.IsValid)
+            {
+                model.lstPersonas = getPersonas();
+                return View(model);
+            }
+            //Actualizar en la BD
+            using (tiendaEntities db = new tiendaEntities())
+            {
+                PERSONAS persona = new PERSONAS();
+                persona.ID_PERSONA = model.ID_PERSONA;
+                persona.NOM_PERSONA = model.NOM_PERSONA;
+                persona.APE_PERSONA = model.APE_PERSONA;
+                persona.TEL_PERSONA = model.TEL_PERSONA;
+                persona.EMAIL_PERSONA = model.EMAIL_PERSONA;
+                persona.DIR_PERSONA = model.DIR_PERSONA;
+                persona.TIPO_PERSONA = model.TIPO_PERSONA;
+
+                db.Entry(persona).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+            return Redirect(Url.Content("~/Personas/"));
+        }
     }
 }

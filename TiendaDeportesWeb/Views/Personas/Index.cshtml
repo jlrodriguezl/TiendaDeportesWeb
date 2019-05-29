@@ -36,8 +36,8 @@
             <td>@oPersona.TIPO_PERSONA</td>
             <td style="text-align: center">
                 <input type="button" value="Editar" class="btn btn-default"
-                       onclick="document.location.href='@Url.Content("~/Fabricantes/Edit/?id="
-                                                           +oPersona.ID_PERSONA)'" />
+                       onclick="document.location.href='@Url.Content("~/Personas/Edit/?id="
+                                                           +oPersona.ID_PERSONA + "&tipoPersona="+oPersona.TIPO_PERSONA)'" />
                 <input type="button" value="Eliminar" class="btn btn-danger"
                        onclick="jsDelete(@oPersona.ID_PERSONA);" />
             </td>
@@ -49,7 +49,7 @@
 <script>
     function jsDelete(id) {
         if (confirm("Está seguro de eliminar este registro?")) {
-            url = "@Url.Content("~/Fabricantes/Delete")" + "/?id=" + id;
+            url = "@Url.Content("~/Personas/Delete")" + "/?id=" + id;
             $.post(url, function (data){
                 if (data == "1") {
                     document.location.href = "@Url.Content("~/Personas/")"
