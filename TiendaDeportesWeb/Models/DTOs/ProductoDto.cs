@@ -17,5 +17,7 @@ namespace TiendaDeportesWeb.Models.DTOs
 
         public virtual CATEGORIAS CATEGORIAS { get; set; }
         public virtual FABRICANTES FABRICANTES { get; set; }
+
+        public List<FabricantesDTO> lstFabricantes { get; set; }
     }
 }

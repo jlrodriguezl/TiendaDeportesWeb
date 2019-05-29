@@ -1,0 +1,33 @@
+﻿@model TiendaDeportesWeb.Models.DTOs.ProductoDto
+@{
+    ViewBag.Title = "gestion productos";
+}
+
+<h2>Add</h2>
+<div class="row">
+    <div class="col-md-12">
+
+        @using (Html.BeginForm("Add", "Productos", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.LabelFor(f => f.ID_PRODUCTO)
+            @Html.TextBoxFor(f => f.ID_PRODUCTO, new { @class = "form-control" })
+            @Html.ValidationMessage("IDProducto", new { @class = "text-danger" })
+            <br />
+
+            @Html.LabelFor(f => f.NOM_PRODUCTO)
+            @Html.TextBoxFor(f => f.NOM_PRODUCTO, new { @class = "form-control" })
+            @Html.ValidationMessage("nomFabricante", new { @class = "text-danger" })
+            <br />
+        
+
+            <div style="text-align: left">
+                <br />
+                <input type="submit" class="btn btn-success" value="Guardar" />
+            </div>
+
+        }
+
+    </div>
+</div>
+
+
