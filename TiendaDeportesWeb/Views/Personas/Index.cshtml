@@ -1,0 +1,63 @@
+﻿@model List<TiendaDeportesWeb.Models.DTOs.PersonasDto>
+@{
+    ViewBag.Title = "Personas";
+}
+
+<h2>Personas</h2>
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" value="Nuevo"
+               onclick="document.location.href='@Url.Content("~/Personas/Add")'" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Cedula</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Telefono</th>
+                <th>Email</th>
+                <th>Direccion</th>
+                <th>Tipo</th>
+                <th style="text-align: center">Acciones</th>
+            </tr>
+            @foreach (var oPersona in Model)
+            {
+        <tr>
+            <td>@oPersona.ID_PERSONA</td>
+            <td>@oPersona.NOM_PERSONA</td>
+            <td>@oPersona.APE_PERSONA</td>
+            <td>@oPersona.TEL_PERSONA</td>
+            <td>@oPersona.EMAIL_PERSONA</td>
+            <td>@oPersona.DIR_PERSONA</td>
+            <td>@oPersona.TIPO_PERSONA</td>
+            <td style="text-align: center">
+                <input type="button" value="Editar" class="btn btn-default"
+                       onclick="document.location.href='@Url.Content("~/Personas/Edit/?id="
+                                                           +oPersona.ID_PERSONA + "&tipoPersona="+oPersona.TIPO_PERSONA)'" />
+                <input type="button" value="Eliminar" class="btn btn-danger"
+                       onclick="jsDelete(@oPersona.ID_PERSONA, '@oPersona.TIPO_PERSONA');" />
+            </td>
+        </tr>
+            }
+        </table>
+    </div>
+</div>
+<script>
+    function jsDelete(id, tipoPersona) {
+        if (confirm("Está seguro de eliminar este registro?")) {
+            url = "@Url.Content("~/Personas/Delete")" + "/?id=" + id + "&tipoPersona=" + tipoPersona;
+            $.post(url, function (data){
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/Personas/")"
+                } else {
+                    alert(data);
+                }
+            })
+        }
+    }
+</script>
+

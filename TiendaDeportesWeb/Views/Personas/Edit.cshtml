@@ -1,0 +1,59 @@
+﻿@model TiendaDeportesWeb.Models.DTOs.PersonasDto
+@{
+    ViewBag.Title = "Gestionar Personas";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <!--Inicio del formulario de Inserción de datos
+        Params(1->Action, 2->Controller, 3->Method, 4->Params)
+        -->
+        @using (Html.BeginForm("Edit", "Personas", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.LabelFor(f => f.ID_PERSONA)
+            @Html.TextBoxFor(f => f.ID_PERSONA, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessage("idPersona", new { @class = "text-danger" })
+            <br />
+
+            @Html.LabelFor(f => f.NOM_PERSONA)
+            @Html.TextBoxFor(f => f.NOM_PERSONA, new { @class = "form-control" })
+            @Html.ValidationMessage("nomPersona", new { @class = "text-danger" })
+            <br />
+
+            @Html.LabelFor(f => f.APE_PERSONA)
+            @Html.TextBoxFor(f => f.APE_PERSONA, new { @class = "form-control" })
+            @Html.ValidationMessage("nomApellido", new { @class = "text-danger" })
+            <br />
+
+            @Html.LabelFor(f => f.TEL_PERSONA)
+            @Html.TextBoxFor(f => f.TEL_PERSONA, new { @class = "form-control" })
+            @Html.ValidationMessage("telPersona", new { @class = "text-danger" })
+            <br />
+
+            @Html.LabelFor(f => f.EMAIL_PERSONA)
+            @Html.TextBoxFor(f => f.EMAIL_PERSONA, new { @class = "form-control" })
+            @Html.ValidationMessage("emailPersona", new { @class = "text-danger" })
+            <br />
+
+            @Html.LabelFor(f => f.DIR_PERSONA)
+            @Html.TextBoxFor(f => f.DIR_PERSONA, new { @class = "form-control" })
+            @Html.ValidationMessage("dirPersona", new { @class = "text-danger" })
+            <br />
+
+            @Html.LabelFor(f => f.TIPO_PERSONA)
+            @Html.DropDownListFor(f => Model.TIPO_PERSONA, new SelectList(Model.lstPersonas,
+                    "ID_DOMINIO", "VLR_DOMINIO"),
+                    htmlAttributes: new { @class = "form-control", id = "lstPersonas", @readonly = "readonly"})
+            @Html.ValidationMessage("PaisFabricante", new { @class = "text-danger" })
+
+            <div style="text-align: left">
+                <br />
+                <input type="submit" class="btn btn-success" value="Guardar" />
+            </div>
+
+        }
+
+    </div>
+</div>
