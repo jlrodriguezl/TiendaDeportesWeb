@@ -17,7 +17,9 @@
             <tr>
                 <th>Id Producto</th>
                 <th>Nombre Producto</th>
-                
+                <th>Det_Producto</th>
+                <th>Precio_actual</th>
+
                 <th style="text-align: center">Acciones</th>
             </tr>
             @foreach (var oproducto in  Model)
@@ -25,7 +27,9 @@
             <tr>
                 <td>@oproducto.ID_PRODUCTO</td>
                 <td>@oproducto.NOM_PRODUCTO</td>
-                
+                <td>@oproducto.DET_PRODUCTO</td>
+                <td>@oproducto.PRECIO_ACTUAL</td>
+
                 <td style="text-align: center">
                     <input type="button" value="Editar" class="btn btn-default"
                            onclick="document.location.href='@Url.Content("~/Productos/Edit/?id="
@@ -41,10 +45,10 @@
 <script>
     function jsDelete(id) {
         if (confirm("Está seguro de eliminar este registro?")) {
-            url = "@Url.Content("~/Producto/Delete")" + "/?id=" + id;
+            url = "@Url.Content("~/Productos/Delete")" + "/?id=" + id;
             $.post(url, function (data){
                 if (data == "1") {
-                    document.location.href = "@Url.Content("~/Producto/")"
+                    document.location.href = "@Url.Content("~/Productos/")"
                 } else {
                     alert(data);
                 }
