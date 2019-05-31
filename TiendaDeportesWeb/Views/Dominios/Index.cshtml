@@ -1,0 +1,57 @@
+﻿@model List<TiendaDeportesWeb.Models.DTOs.DominiosDTO>
+
+@{
+    ViewBag.Title = "Dominios";
+}
+
+<h2>DOMINIOS</h2>
+
+<div class="row">
+    <div class="col-md-12">
+        <input type="button" class="btn btn-primary" value="Nuevo"
+               onclick="document.location.href='@Url.Content("~/Dominios/Add")'" />
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <table class="table table-bordered">
+            <tr>
+                <th>Tipo de Dominio</th>
+                <th>Id Dominio</th>
+                <th>Valor del Dominio</th>
+                <th style="text-align: center">Acciones</th>
+            </tr>
+            @foreach (var oDominio in Model)
+            {
+                <tr>
+                    <td>@oDominio.TIPO_DOMINIO</td>
+                    <td>@oDominio.ID_DOMINIO</td>
+                    <td>@oDominio.VLR_DOMINIO</td>
+                    <td style="text-align: center">
+                        <input type="button" value="Editar" class="btn btn-default"
+                               onclick="document.location.href='@Url.Content("~/Dominios/Edit/?id="+oDominio.ID_DOMINIO + "&tipo="+oDominio.TIPO_DOMINIO)'" />
+                        ||  
+
+                        <input type="button" value="Eliminar" class="btn btn-danger"
+                               onclick="jsDelete('@oDominio.TIPO_DOMINIO', '@oDominio.ID_DOMINIO');" />
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
+<script>
+    function jsDelete(tipo, id) {
+        if (confirm("Está seguro de eliminar este registro?")) {
+            url = "@Url.Content("~/Dominios/Delete")" + "/?id="+id + "&tipo="+tipo;
+            $.post(url, function (data){
+                if (data == "1") {
+                    document.location.href = "@Url.Content("~/Dominios/")"
+                } else {
+                    alert(data);
+                }
+            })
+        }
+    }
+</script>
