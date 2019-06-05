@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="tiendaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="tiendaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CATEGORIAS">
           <Key>
             <PropertyRef Name="ID_CATEGORIA" />
@@ -55,6 +55,7 @@
           <Property Name="UND_DISPONIBLES" Type="int" Nullable="false" />
           <Property Name="ID_CATEGORIA" Type="int" Nullable="false" />
           <Property Name="ID_FABRICANTE" Type="int" Nullable="false" />
+          <Property Name="FOTO_PRODUCTO" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="VENTA_PRODUCTOS">
           <Key>
@@ -75,6 +76,7 @@
           <Property Name="VLR_IVA" Type="numeric" Precision="10" Scale="0" Nullable="false" />
           <Property Name="ID_PERSONA" Type="numeric" Precision="12" Scale="0" Nullable="false" />
           <Property Name="TIPO_PERSONA" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="ESTADO_VENTA" Type="varchar" MaxLength="3" />
         </EntityType>
         <Association Name="FK__CATEGORIA__ID_CA__4BAC3F29">
           <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="0..1" />
@@ -183,8 +185,7 @@
             <End Role="VENTAS" EntitySet="VENTAS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tiendaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -246,6 +247,7 @@
           <NavigationProperty Name="CATEGORIAS" Relationship="Self.FK__PRODUCTOS__ID_CA__5165187F" FromRole="PRODUCTOS" ToRole="CATEGORIAS" />
           <NavigationProperty Name="FABRICANTES" Relationship="Self.FK__PRODUCTOS__ID_FA__52593CB8" FromRole="PRODUCTOS" ToRole="FABRICANTES" />
           <NavigationProperty Name="VENTA_PRODUCTOS" Relationship="Self.FK__VENTA_PRO__ID_PR__59063A47" FromRole="PRODUCTOS" ToRole="VENTA_PRODUCTOS" />
+          <Property Name="FOTO_PRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VENTA_PRODUCTOS">
           <Key>
@@ -270,6 +272,7 @@
           <Property Name="TIPO_PERSONA" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="PERSONAS" Relationship="Self.FK__VENTAS__5535A963" FromRole="VENTAS" ToRole="PERSONAS" />
           <NavigationProperty Name="VENTA_PRODUCTOS" Relationship="Self.FK__VENTA_PRO__ID_VE__5812160E" FromRole="VENTAS" ToRole="VENTA_PRODUCTOS" />
+          <Property Name="ESTADO_VENTA" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__CATEGORIA__ID_CA__4BAC3F29">
           <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="0..1" />
@@ -428,6 +431,7 @@
           <EntitySetMapping Name="PRODUCTOS">
             <EntityTypeMapping TypeName="tiendaModel.PRODUCTOS">
               <MappingFragment StoreEntitySet="PRODUCTOS">
+                <ScalarProperty Name="FOTO_PRODUCTO" ColumnName="FOTO_PRODUCTO" />
                 <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
                 <ScalarProperty Name="NOM_PRODUCTO" ColumnName="NOM_PRODUCTO" />
                 <ScalarProperty Name="DET_PRODUCTO" ColumnName="DET_PRODUCTO" />
@@ -452,6 +456,7 @@
           <EntitySetMapping Name="VENTAS">
             <EntityTypeMapping TypeName="tiendaModel.VENTAS">
               <MappingFragment StoreEntitySet="VENTAS">
+                <ScalarProperty Name="ESTADO_VENTA" ColumnName="ESTADO_VENTA" />
                 <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
                 <ScalarProperty Name="FECHA_VENTA" ColumnName="FECHA_VENTA" />
                 <ScalarProperty Name="VLR_IVA" ColumnName="VLR_IVA" />

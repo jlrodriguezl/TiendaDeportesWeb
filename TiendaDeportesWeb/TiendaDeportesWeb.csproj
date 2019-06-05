@@ -144,11 +144,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CompraController.cs" />
+    <Compile Include="Controllers\DominiosController.cs" />
     <Compile Include="Controllers\FabricantesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
+    <Compile Include="DAL\ConsultasGenerales.cs" />
     <Compile Include="Filters\VerificarSesion.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -159,6 +162,8 @@
     <Compile Include="Models\DOMINIOS.cs">
       <DependentUpon>ModelTiendaWeb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTOs\CategoriasDto.cs" />
+    <Compile Include="Models\DTOs\CompraDTO.cs" />
     <Compile Include="Models\DTOs\DominiosDTO.cs" />
     <Compile Include="Models\DTOs\FabricantesDTO.cs" />
     <Compile Include="Models\DTOs\ProductoDto.cs" />
@@ -200,6 +205,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\Images\Inicio.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -258,9 +264,14 @@
     <Content Include="Views\Personas\Index.cshtml" />
     <Content Include="Views\Personas\Add.cshtml" />
     <Content Include="Views\Personas\Edit.cshtml" />
+    <Content Include="Views\Dominios\Add.cshtml" />
+    <Content Include="Views\Dominios\Edit.cshtml" />
+    <Content Include="Views\Dominios\Index.cshtml" />
+    <Content Include="Views\Compra\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Productos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

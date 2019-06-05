@@ -27,6 +27,8 @@ namespace TiendaDeportesWeb.Models
         public int UND_DISPONIBLES { get; set; }
         public int ID_CATEGORIA { get; set; }
         public int ID_FABRICANTE { get; set; }
+
+        public string FOTO_PRODUCTO { get; set; }
     
         public virtual CATEGORIAS CATEGORIAS { get; set; }
         public virtual FABRICANTES FABRICANTES { get; set; }
