@@ -16,14 +16,32 @@ namespace TiendaDeportesWeb.Controllers
 
 
         // GET: Compra
+        
         public ActionResult Index()
         {
             con = new ConsultasGenerales();
             CompraDTO compra = new CompraDTO();
             compra.lstFabricantes = con.GetListaFabricantes();
-            compra.lstProductos = con.getProductos();
-            compra.lstCategorias = con.GetCategorias();
-            return View();
+            compra.lstProductos = con.getProductos(null);
+            compra.lstCategorias = con.getCategoriasCompra();
+            return View(compra);
+        }
+
+        [HttpGet]
+        [Route("Compra/Index/{idCat:int")]
+        public ActionResult Index(int? idCat)
+        {
+            con = new ConsultasGenerales();
+            CompraDTO compra = new CompraDTO();
+            compra.lstFabricantes = con.GetListaFabricantes();
+            compra.lstProductos = con.getProductos(idCat);
+            compra.lstCategorias = con.getCategoriasCompra();
+            return View(compra);
+        }
+
+        public ActionResult listarVenta()
+        {
+
         }
     }
 }

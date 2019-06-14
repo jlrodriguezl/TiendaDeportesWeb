@@ -9,15 +9,19 @@ namespace TiendaDeportesWeb.Models.DTOs
     public class CompraDTO
     {
         //cliente
-        public PersonasDto cliente { get; set; }
+        public PersonasDto cliente {get; set;}
 
         //Productos
-        public List<ProductoDto> lstProductos { get; set; }
+        public List<ProductoDto> lstProductos {get; set;}
 
         //categorias
-        public List<CategoriasDto> lstCategorias { get; set; }
+        public List<CategoriasTiendaDTO> lstCategorias { get; set; }
+
+        public List<CategoriasDto> lstCategoriasPadre { get; set; }
 
         //marcas
-        public List<FabricantesDTO> lstFabricantes { get; set; }
+        public List<FabricantesDTO> lstFabricantes {get; set;}
+
+                
     }
 }
