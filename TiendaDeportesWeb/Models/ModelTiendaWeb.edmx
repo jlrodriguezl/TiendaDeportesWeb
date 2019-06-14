@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="tiendaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="tiendaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CATEGORIAS">
           <Key>
             <PropertyRef Name="ID_CATEGORIA" />
@@ -55,6 +55,7 @@
           <Property Name="UND_DISPONIBLES" Type="int" Nullable="false" />
           <Property Name="ID_CATEGORIA" Type="int" Nullable="false" />
           <Property Name="ID_FABRICANTE" Type="int" Nullable="false" />
+          <Property Name="FOTO_PRODUCTO" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="VENTA_PRODUCTOS">
           <Key>
@@ -75,8 +76,9 @@
           <Property Name="VLR_IVA" Type="numeric" Precision="10" Scale="0" Nullable="false" />
           <Property Name="ID_PERSONA" Type="numeric" Precision="12" Scale="0" Nullable="false" />
           <Property Name="TIPO_PERSONA" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="ESTADO_VENTA" Type="varchar" MaxLength="3" />
         </EntityType>
-        <Association Name="FK__CATEGORIA__ID_CA__4BAC3F29">
+        <Association Name="FK__CATEGORIA__ID_CA__1273C1CD">
           <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="0..1" />
           <End Role="CATEGORIAS1" Type="Self.CATEGORIAS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -88,7 +90,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PRODUCTOS__ID_CA__5165187F">
+        <Association Name="FK__PRODUCTOS__ID_CA__182C9B23">
           <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="1" />
           <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -100,7 +102,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PRODUCTOS__ID_FA__52593CB8">
+        <Association Name="FK__PRODUCTOS__ID_FA__1920BF5C">
           <End Role="FABRICANTES" Type="Self.FABRICANTES" Multiplicity="1" />
           <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -112,7 +114,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTA_PRO__ID_PR__59063A47">
+        <Association Name="FK__VENTA_PRO__ID_PR__1FCDBCEB">
           <End Role="PRODUCTOS" Type="Self.PRODUCTOS" Multiplicity="1" />
           <End Role="VENTA_PRODUCTOS" Type="Self.VENTA_PRODUCTOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -124,7 +126,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTA_PRO__ID_VE__5812160E">
+        <Association Name="FK__VENTA_PRO__ID_VE__1ED998B2">
           <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="1" />
           <End Role="VENTA_PRODUCTOS" Type="Self.VENTA_PRODUCTOS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -136,7 +138,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VENTAS__5535A963">
+        <Association Name="FK__VENTAS__1BFD2C07">
           <End Role="PERSONAS" Type="Self.PERSONAS" Multiplicity="1" />
           <End Role="VENTAS" Type="Self.VENTAS" Multiplicity="*" />
           <ReferentialConstraint>
@@ -158,33 +160,32 @@
           <EntitySet Name="PRODUCTOS" EntityType="Self.PRODUCTOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VENTA_PRODUCTOS" EntityType="Self.VENTA_PRODUCTOS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VENTAS" EntityType="Self.VENTAS" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__CATEGORIA__ID_CA__4BAC3F29" Association="Self.FK__CATEGORIA__ID_CA__4BAC3F29">
+          <AssociationSet Name="FK__CATEGORIA__ID_CA__1273C1CD" Association="Self.FK__CATEGORIA__ID_CA__1273C1CD">
             <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
             <End Role="CATEGORIAS1" EntitySet="CATEGORIAS" />
           </AssociationSet>
-          <AssociationSet Name="FK__PRODUCTOS__ID_CA__5165187F" Association="Self.FK__PRODUCTOS__ID_CA__5165187F">
+          <AssociationSet Name="FK__PRODUCTOS__ID_CA__182C9B23" Association="Self.FK__PRODUCTOS__ID_CA__182C9B23">
             <End Role="CATEGORIAS" EntitySet="CATEGORIAS" />
             <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__PRODUCTOS__ID_FA__52593CB8" Association="Self.FK__PRODUCTOS__ID_FA__52593CB8">
+          <AssociationSet Name="FK__PRODUCTOS__ID_FA__1920BF5C" Association="Self.FK__PRODUCTOS__ID_FA__1920BF5C">
             <End Role="FABRICANTES" EntitySet="FABRICANTES" />
             <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTA_PRO__ID_PR__59063A47" Association="Self.FK__VENTA_PRO__ID_PR__59063A47">
+          <AssociationSet Name="FK__VENTA_PRO__ID_PR__1FCDBCEB" Association="Self.FK__VENTA_PRO__ID_PR__1FCDBCEB">
             <End Role="PRODUCTOS" EntitySet="PRODUCTOS" />
             <End Role="VENTA_PRODUCTOS" EntitySet="VENTA_PRODUCTOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTA_PRO__ID_VE__5812160E" Association="Self.FK__VENTA_PRO__ID_VE__5812160E">
+          <AssociationSet Name="FK__VENTA_PRO__ID_VE__1ED998B2" Association="Self.FK__VENTA_PRO__ID_VE__1ED998B2">
             <End Role="VENTAS" EntitySet="VENTAS" />
             <End Role="VENTA_PRODUCTOS" EntitySet="VENTA_PRODUCTOS" />
           </AssociationSet>
-          <AssociationSet Name="FK__VENTAS__5535A963" Association="Self.FK__VENTAS__5535A963">
+          <AssociationSet Name="FK__VENTAS__1BFD2C07" Association="Self.FK__VENTAS__1BFD2C07">
             <End Role="PERSONAS" EntitySet="PERSONAS" />
             <End Role="VENTAS" EntitySet="VENTAS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="tiendaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -246,6 +247,7 @@
           <NavigationProperty Name="CATEGORIAS" Relationship="Self.FK__PRODUCTOS__ID_CA__5165187F" FromRole="PRODUCTOS" ToRole="CATEGORIAS" />
           <NavigationProperty Name="FABRICANTES" Relationship="Self.FK__PRODUCTOS__ID_FA__52593CB8" FromRole="PRODUCTOS" ToRole="FABRICANTES" />
           <NavigationProperty Name="VENTA_PRODUCTOS" Relationship="Self.FK__VENTA_PRO__ID_PR__59063A47" FromRole="PRODUCTOS" ToRole="VENTA_PRODUCTOS" />
+          <Property Name="FOTO_PRODUCTO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="VENTA_PRODUCTOS">
           <Key>
@@ -270,6 +272,7 @@
           <Property Name="TIPO_PERSONA" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="PERSONAS" Relationship="Self.FK__VENTAS__5535A963" FromRole="VENTAS" ToRole="PERSONAS" />
           <NavigationProperty Name="VENTA_PRODUCTOS" Relationship="Self.FK__VENTA_PRO__ID_VE__5812160E" FromRole="VENTAS" ToRole="VENTA_PRODUCTOS" />
+          <Property Name="ESTADO_VENTA" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK__CATEGORIA__ID_CA__4BAC3F29">
           <End Role="CATEGORIAS" Type="Self.CATEGORIAS" Multiplicity="0..1" />
@@ -428,6 +431,7 @@
           <EntitySetMapping Name="PRODUCTOS">
             <EntityTypeMapping TypeName="tiendaModel.PRODUCTOS">
               <MappingFragment StoreEntitySet="PRODUCTOS">
+                <ScalarProperty Name="FOTO_PRODUCTO" ColumnName="FOTO_PRODUCTO" />
                 <ScalarProperty Name="ID_PRODUCTO" ColumnName="ID_PRODUCTO" />
                 <ScalarProperty Name="NOM_PRODUCTO" ColumnName="NOM_PRODUCTO" />
                 <ScalarProperty Name="DET_PRODUCTO" ColumnName="DET_PRODUCTO" />
@@ -452,6 +456,7 @@
           <EntitySetMapping Name="VENTAS">
             <EntityTypeMapping TypeName="tiendaModel.VENTAS">
               <MappingFragment StoreEntitySet="VENTAS">
+                <ScalarProperty Name="ESTADO_VENTA" ColumnName="ESTADO_VENTA" />
                 <ScalarProperty Name="ID_VENTA" ColumnName="ID_VENTA" />
                 <ScalarProperty Name="FECHA_VENTA" ColumnName="FECHA_VENTA" />
                 <ScalarProperty Name="VLR_IVA" ColumnName="VLR_IVA" />
