@@ -11,15 +11,27 @@ namespace TiendaDeportesWeb.Controllers
     public class CompraController : Controller
     {
         public ConsultasGenerales con;
-        // GET: Compra
+        // GET: Compra       
         public ActionResult Index()
         {
             con = new ConsultasGenerales();
             CompraDTO compra = new CompraDTO();
             compra.lstFabricantes = con.getListaFabricantes();
-            compra.lstProductos = con.getProductos();
-            compra.lstCategorias = con.getCategorias();
-            return View();
+            compra.lstProductos = con.getProductos(null);
+            compra.lstCategorias = con.getCategoriasCompra();
+            return View(compra);
+        }
+        
+        [HttpGet]
+        [Route("Compra/Index/{idCat:int}")]
+        public ActionResult Index(int? idCat)
+        {
+            con = new ConsultasGenerales();
+            CompraDTO compra = new CompraDTO();
+            compra.lstFabricantes = con.getListaFabricantes();
+            compra.lstProductos = con.getProductos(idCat);
+            compra.lstCategorias = con.getCategoriasCompra();
+            return View(compra);
         }
     }
 }

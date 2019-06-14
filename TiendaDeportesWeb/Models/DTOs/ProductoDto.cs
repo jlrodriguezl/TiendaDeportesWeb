@@ -33,7 +33,8 @@ namespace TiendaDeportesWeb.Models.DTOs
         [Required]
         [Display(Name = "Fabricante")]
         public int ID_FABRICANTE { get; set; }
-
+        [Display(Name = "Foto Producto")]
+        public String FOTO_PRODUCTO { get; set; }
 
         public List<CategoriasDto> lstCategorias { get; set; }
 

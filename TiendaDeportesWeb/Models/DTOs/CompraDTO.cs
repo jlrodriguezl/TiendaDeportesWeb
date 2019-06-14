@@ -13,7 +13,7 @@ namespace TiendaDeportesWeb.Models.DTOs
         //Productos disponibles
         public List<ProductoDto> lstProductos { get; set; }
         //Categorias
-        public List<CategoriasDto> lstCategorias { get; set; }
+        public List<CategoriasTiendaDTO> lstCategorias { get; set; }
         //Marcas
         public List<FabricantesDTO> lstFabricantes { get; set; }
     }
