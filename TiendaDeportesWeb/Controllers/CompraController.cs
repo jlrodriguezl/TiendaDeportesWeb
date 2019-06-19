@@ -34,6 +34,14 @@ namespace TiendaDeportesWeb.Controllers
             compra.lstProductos = con.getProductos(idCat);
             compra.lstCategorias = con.getCategoriasCompra();
             return View(compra);
-        }
+        }
+        [HttpPost]
+        public ActionResult Add(int id)
+        {
+
+
+            return Content("1");
+        }
+
     }
 }

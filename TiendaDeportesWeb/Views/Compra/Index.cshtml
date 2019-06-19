@@ -247,68 +247,68 @@
             </div>
             <div class="content-bottom">
                 @{
-                var i = 1;
-                 }
+                    var i = 1;
+                }
                 @foreach (var oPRODUCTO in Model.lstProductos)
                 {
                     {
                         if (i == 1)
                         {
 
-                    @:<div class="box1">
-                    }
-
-                    <div class="col_1_of_3 span_1_of_3">
-                      <a href="single.html">
-                    <div class="view view-fifth">
-                        <div class="top_box">
-                            <h3 class="m_1">@oPRODUCTO.NOM_PRODUCTO</h3>
-                            <p class="m_2">@oPRODUCTO.DET_PRODUCTO</p>
-                            <div class="grid_img">
-                        @{ var urlImgProd = "~/contec/images/productos/" + oPRODUCTO.FOTO_PRODUCTO + "";
+                            @:<div class="box1">
                             }
-                                <div class="css3"><img src="~/Content/Images/pic3.jpg" alt="" /></div>
-                                <div class="mask">
-                                    <div class="info">vista Previa</div>
-                                </div>
-                            </div>
-                            <div class="price">@oPRODUCTO.PRECIO_ACTUAL</div>
-                        </div>
-                    </div>
 
-                            <ul class="list">
-                             <li>
-                                <img src="~/Content/Images/plus.png" alt="" />
-                                <ul class="icon1 sub-icon1 profile_img">
-                            <li>
-                                <a class="active-icon c1" href="#">Add To Bag </a>
-                             <ul class="sub-icon1 list">
-                    <li><h3>sed diam nonummy</h3><a href=""></a></li>
-                    <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                             </ul>
-                                </li>
-                             </ul>
-                              </li>
-                                </ul>
-                            <div class="clear"></div>
+                            <div class="col_1_of_3 span_1_of_3">
+                                <a href="single.html">
+                                    <div class="view view-fifth">
+                                        <div class="top_box">
+                                            <h3 class="m_1">@oPRODUCTO.NOM_PRODUCTO</h3>
+                                            <p class="m_2">@oPRODUCTO.DET_PRODUCTO</p>
+                                            <div class="grid_img">
+                                                @{ var urlImgProd = "~/contec/images/productos/" + oPRODUCTO.FOTO_PRODUCTO + "";
+                                                }
+                                                <div class="css3"><img src="~/Content/Images/pic3.jpg" alt="" /></div>
+                                                <div class="mask">
+                                                    <div class="info">vista Previa</div>
+                                                </div>
+                                            </div>
+                                            <div class="price">@oPRODUCTO.PRECIO_ACTUAL</div>
+                                        </div>
+                                    </div>
+
+                                    <ul class="list">
+                                        <li>
+                                            <img src="~/Content/Images/plus.png" alt="" />
+                                            <ul class="icon1 sub-icon1 profile_img">
+                                                <li>
+                                                    <a class="active-icon c1" href="" onclick="jsAddCarrito(@oPRODUCTO.ID_PRODUCTO);">Agregar al carro</a>
+                                                    <ul class="sub-icon1 list">
+                                                        <li><h3>sed diam nonummy</h3><a href=""></a></li>
+                                                        <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                    <div class="clear"></div>
                                 </a>
-                                </div>
+                            </div>
                             if (i == 3)
                             {
-                                @:<div> 
-                                <div class="clear"></div>
-                                    }
-                                    i++;
-                                    if (i == 4) { i = 1; }
+                                @:<div>
+                                    <div class="clear"></div>
                                 }
+                                i++;
+                                if (i == 4) { i = 1; }
                             }
+                        }
                 <div class="box1">
                     <div class="clear"></div>
                 </div>
-                             </div>
-                    </div>
-                         </div>
             </div>
+        </div>
+    </div>
+    </div>
     <div class="footer">
         <div class="footer-top">
             <div class="wrap">
@@ -542,6 +542,17 @@
 
         });
     </script>
+    <script>
+        function jsAddCarrito(id) {
+        url = "@Url.Content("~/Compra/Add")" + "/?id=" + id;
+        $.post(url, function (data) {
+        if (data != "1") {
+        alert(data);
+        }
+        })
+        }
+    </script>
+
     <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
 </body>
          
