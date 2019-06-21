@@ -9,7 +9,9 @@ namespace TiendaDeportesWeb.Models.DTOs
     public class CarritoDTo
     {
         public PERSONAS cliente { get; set; }
+        public List<VentaProductosDTO> lstVentaProductos { get; set; }
 
+        public VentaDTo venta { get; set; }
 
     }
 }

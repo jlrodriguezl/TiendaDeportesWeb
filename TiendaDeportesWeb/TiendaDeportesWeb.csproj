@@ -172,7 +172,7 @@
     <Compile Include="Models\DTOs\ProductoDto.cs" />
     <Compile Include="Models\DTOs\PersonasDto.cs" />
     <Compile Include="Models\DTOs\VentaDTo.cs" />
-    <Compile Include="Models\DTOs\Venta_productoDTo.cs" />
+    <Compile Include="Models\DTOs\VentaProductosDTO.cs" />
     <Compile Include="Models\FABRICANTES.cs">
       <DependentUpon>ModelTiendaWeb.tt</DependentUpon>
     </Compile>

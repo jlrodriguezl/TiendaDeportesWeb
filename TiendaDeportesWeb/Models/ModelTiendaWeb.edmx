@@ -152,6 +152,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Prc_Add_Carrito" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdProducto" Type="int" Mode="In" />
+          <Parameter Name="IdPersona" Type="numeric" Mode="In" />
+          <Parameter Name="TipoPersona" Type="varchar" Mode="In" />
+        </Function>
         <EntityContainer Name="tiendaModelStoreContainer">
           <EntitySet Name="CATEGORIAS" EntityType="Self.CATEGORIAS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="DOMINIOS" EntityType="Self.DOMINIOS" Schema="dbo" store:Type="Tables" />
@@ -380,6 +385,11 @@
             <End Role="VENTAS" EntitySet="VENTAS" />
             <End Role="VENTA_PRODUCTOS" EntitySet="VENTA_PRODUCTOS" />
           </AssociationSet>
+          <FunctionImport Name="Prc_Add_Carrito">
+            <Parameter Name="IdProducto" Mode="In" Type="Int32" />
+            <Parameter Name="IdPersona" Mode="In" Type="Decimal" />
+            <Parameter Name="TipoPersona" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -465,6 +475,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Prc_Add_Carrito" FunctionName="tiendaModel.Store.Prc_Add_Carrito" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

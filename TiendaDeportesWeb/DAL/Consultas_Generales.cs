@@ -101,5 +101,48 @@ namespace TiendaDeportesWeb.DAL
             }
             return lstCategoriasTienda;
         }
+
+        public CarritoDTo getVenta(int? idPer)
+        {
+            CarritoDTo cd = null;
+            List<VentaDTo> lstVenta = null;
+            List<VentaProductosDTO> lstVentaProdutos = null;
+
+            using (tiendaEntities db = new tiendaEntities())
+            {
+                lstVenta = (from f in db.VENTAS
+                            where f.ID_PERSONA == idPer
+                            select new VentaDTo
+                            {
+                                ID_VENTA = f.ID_VENTA,
+                                FECHA_VENTA = f.FECHA_VENTA,
+                                VLR_IVA = f.VLR_IVA,
+                                ID_PERSONA = f.ID_PERSONA,
+                                TIPO_PERSONA = f.TIPO_PERSONA,
+                                ESTADO_VENTA = f.ESTADO_VENTA
+                            }).ToList();
+
+                foreach (VentaDTo vd in lstVenta)
+                {
+                    cd = new CarritoDTo();
+                    cd.venta = vd;
+                    //Obtener productos de esa venta
+                    lstVentaProdutos = (from d in db.VENTA_PRODUCTOS
+                                        where d.ID_VENTA == vd.ID_VENTA
+                                        orderby d.PRODUCTOS
+                                        select new VentaProductosDTO
+                                        {
+                                            ID_VENTA_PROD = d.ID_VENTA_PROD,
+                                            ID_VENTA = d.ID_VENTA,
+                                            ID_PRODUCTO = d.ID_PRODUCTO,
+                                            PRECIO_VENTA = d.PRECIO_VENTA,
+                                            CANTIDAD = d.CANTIDAD
+                                        }).ToList();
+                    cd.lstVentaProductos = lstVentaProdutos;
+
+                }
+            }
+            return cd;
+        }
     }
 }

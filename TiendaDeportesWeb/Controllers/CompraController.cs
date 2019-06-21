@@ -13,8 +13,8 @@ namespace TiendaDeportesWeb.Controllers
     {
         public Consultas_Generales con;
         // GET: Compra
-    
-        
+
+
         public ActionResult Index()
         {
             con = new Consultas_Generales();
@@ -35,13 +35,23 @@ namespace TiendaDeportesWeb.Controllers
             compra.lstCategorias = con.getCategoriasCompra();
             return View(compra);
         }
+
         [HttpPost]
         public ActionResult Add(int id)
         {
-
-
-            return Content("1");
+            try
+            {
+                var oPersona = (PERSONAS)System.Web.HttpContext.Current.Session["User"];
+                using (tiendaEntities db = new tiendaEntities())
+                {
+                    db.Prc_Add_Carrito(id, oPersona.ID_PERSONA, oPersona.TIPO_PERSONA);
+                }
+                return Content("1");
+            }
+            catch (Exception e)
+            {
+                return Content(e.GetBaseException().ToString());
+            }
         }
-
     }
 }

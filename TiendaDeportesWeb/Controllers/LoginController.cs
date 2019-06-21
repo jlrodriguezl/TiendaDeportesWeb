@@ -26,7 +26,7 @@ namespace TiendaDeportesWeb.Controllers
 
                     var usuarios = from p in db.PERSONAS
                                    where p.ID_PERSONA == idUser &&
-                                   p.CONTRASENA == pwd && p.TIPO_PERSONA == "EMP"
+                                   p.CONTRASENA == pwd && p.TIPO_PERSONA == "ADM"
                                    select p;
                     if(usuarios.Count() > 0)
                     {
