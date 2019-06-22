@@ -27,7 +27,7 @@
                 parametros = $(this).serialize();
                 $.post(url, parametros, function (data) {
                     if (data == "1") {
-                        document.location.href = "@Url.Content("~/")";
+                        document.location.href = "@Url.Content("~/Compra/Index/")";
                     } else {
                         alert(data);
                     }

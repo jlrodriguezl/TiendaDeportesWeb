@@ -76,7 +76,7 @@
                     <li class="active"><a href="register.html">Sign up & Save</a></li>
                     <li><a href="shop.html">Store Locator</a></li>
                     <li><a href="login.html">My Account</a></li>
-                    <li><a href="checkout.html">CheckOut</a></li>
+                    <li><a href="@Url.Content("~/Compra/listarVenta/")">CheckOut</a></li>
                 </ul>
             </div>
             <ul class="icon2 sub-icon2 profile_img">
@@ -109,7 +109,8 @@
                                         <ul>
                                             @foreach (var oCatHija in oCategoria.subCategorias)
                                             {
-                                                <li><a href="shop.html">@oCatHija.NOM_CATEGORIA</a></li>
+                                                <li><a href="@Url.Content("~/Compra/Index/?idCat=" + oCatHija.ID_CATEGORIA)"
+                                                            >@oCatHija.NOM_CATEGORIA</a></li>
                                             }
                                         </ul>
                                     </div>
@@ -295,7 +296,7 @@
                                             <img src="~/Content/Images/plus.png" alt="" />
                                             <ul class="icon1 sub-icon1 profile_img">
                                                 <li>
-                                                    <a class="active-icon c1" href="#">Agregar al carro</a>
+                                                    <a class="active-icon c1" href="" onclick="jsAddCarrito(@oProducto.ID_PRODUCTO);">Agregar al carro</a>
                                                     <ul class="sub-icon1 list">
                                                         <li><h3>sed diam nonummy</h3><a href=""></a></li>
                                                         <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
@@ -556,6 +557,16 @@
             $().UItoTop({ easingType: 'easeOutQuart' });
 
         });
+    </script>
+    <script>
+    function jsAddCarrito(id) {
+        url = "@Url.Content("~/Compra/Add")" + "/?id=" + id;
+        $.post(url, function (data) {
+            if (data != "1") {
+                alert(data);
+            }
+        })
+    }
     </script>
     <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
 </body>

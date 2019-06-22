@@ -1,0 +1,62 @@
+﻿@model TiendaDeportesWeb.Models.DTOs.VistaVentaDTO
+@{
+    ViewBag.Title = "View";
+}
+<html>
+<head>
+    @Styles.Render("~/Content/css/checkout.css")
+</head>
+<body>
+    <h2>Checkout</h2>
+
+    <div class="row box">
+        <div class="col-lg-12">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id venta</th>
+                        <th>Fecha venta</th>
+                        <th>IVA</th>
+                        <th>Id Cliente</th>
+                        <th>Tipo persona</th>
+                        <th>Estado venta</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td>@Model.carrito.venta.ID_VENTA</td>
+                        <td>@Model.carrito.venta.FECHA_VENTA</td>
+                        <td>@Model.carrito.venta.VLR_IVA</td>
+                        <td>@Model.carrito.venta.ID_PERSONA</td>
+                        <td>@Model.carrito.venta.TIPO_PERSONA</td>
+                        <td>@Model.carrito.venta.ESTADO_VENTA</td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>iD PRODUCTO</th>
+                        <th>PRECIO VENTA</th>
+                        <th>CANTIDAD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var vp in Model.carrito.lstVentaProductos)
+                    {
+                        <tr>
+                            <td>@vp.ID_PRODUCTO</td>
+                            <td>@vp.PRECIO_VENTA</td>
+                            <td>@vp.CANTIDAD</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+</body>
+</html>
+

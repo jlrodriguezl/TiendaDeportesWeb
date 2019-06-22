@@ -162,12 +162,17 @@
     <Compile Include="Models\DOMINIOS.cs">
       <DependentUpon>ModelTiendaWeb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTOs\CarritoDTO.cs" />
     <Compile Include="Models\DTOs\CategoriasDto.cs" />
+    <Compile Include="Models\DTOs\CategoriasTiendaDTO.cs" />
     <Compile Include="Models\DTOs\CompraDTO.cs" />
     <Compile Include="Models\DTOs\DominiosDTO.cs" />
     <Compile Include="Models\DTOs\FabricantesDTO.cs" />
     <Compile Include="Models\DTOs\ProductoDto.cs" />
     <Compile Include="Models\DTOs\PersonasDto.cs" />
+    <Compile Include="Models\DTOs\VentaDTO.cs" />
+    <Compile Include="Models\DTOs\VentaProdutosDTO.cs" />
+    <Compile Include="Models\DTOs\VistaVentaDTO.cs" />
     <Compile Include="Models\FABRICANTES.cs">
       <DependentUpon>ModelTiendaWeb.tt</DependentUpon>
     </Compile>
@@ -205,7 +210,77 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\checkout.css" />
+    <Content Include="Content\css\etalage.css" />
+    <Content Include="Content\css\form.css" />
+    <Content Include="Content\css\megamenu.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\Images\arrow.png" />
+    <Content Include="Content\Images\arrow2.gif" />
+    <Content Include="Content\Images\arrows.png" />
+    <Content Include="Content\Images\as.png" />
+    <Content Include="Content\Images\b-arrow.png" />
+    <Content Include="Content\Images\banner1.jpg" />
+    <Content Include="Content\Images\banner2.jpg" />
+    <Content Include="Content\Images\border.png" />
+    <Content Include="Content\Images\b_star.png" />
+    <Content Include="Content\Images\down_arrow.png" />
+    <Content Include="Content\Images\f_icon.png" />
+    <Content Include="Content\Images\f_icon1.png" />
+    <Content Include="Content\Images\f_icon2.png" />
+    <Content Include="Content\Images\img-sprite.png" />
     <Content Include="Content\Images\Inicio.jpg" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\nav_img.jpg" />
+    <Content Include="Content\Images\nav_img1.jpg" />
+    <Content Include="Content\Images\nav_img2.jpg" />
+    <Content Include="Content\Images\nz.png" />
+    <Content Include="Content\Images\pic.jpg" />
+    <Content Include="Content\Images\pic1.jpg" />
+    <Content Include="Content\Images\pic10.jpg" />
+    <Content Include="Content\Images\pic11.jpg" />
+    <Content Include="Content\Images\pic2.jpg" />
+    <Content Include="Content\Images\pic3.jpg" />
+    <Content Include="Content\Images\pic4.jpg" />
+    <Content Include="Content\Images\pic5.jpg" />
+    <Content Include="Content\Images\pic6.jpg" />
+    <Content Include="Content\Images\pic7.jpg" />
+    <Content Include="Content\Images\pic8.jpg" />
+    <Content Include="Content\Images\pic9.jpg" />
+    <Content Include="Content\Images\pk.png" />
+    <Content Include="Content\Images\plus.png" />
+    <Content Include="Content\Images\Productos\Consola PS4 Slim.jpg" />
+    <Content Include="Content\Images\Productos\Consola Xbox One X.jpg" />
+    <Content Include="Content\Images\Productos\Nevecon Samsung Family Hub.jpg" />
+    <Content Include="Content\Images\Productos\Nevecón 656 Haceb.jpg" />
+    <Content Include="Content\Images\Productos\Nevera 220 Haceb.jpg" />
+    <Content Include="Content\Images\Productos\Nevera Inverter Samsung.jpg" />
+    <Content Include="Content\Images\Productos\Nintendo Wii U.jpg" />
+    <Content Include="Content\Images\Productos\Televisor LG 49 Pulgadas Full HD.jpg" />
+    <Content Include="Content\Images\Productos\Televisor LG Led 43 Pulgadas Full HD Smart TV.jpg" />
+    <Content Include="Content\Images\Productos\Televisor LG Led 55 pulgadas UHD 4K Smart TV.jpg" />
+    <Content Include="Content\Images\Productos\Televisor LG Smart 32 pulgadas HD.jpg" />
+    <Content Include="Content\Images\radius.png" />
+    <Content Include="Content\Images\srl.png" />
+    <Content Include="Content\Images\star.png" />
+    <Content Include="Content\Images\s_arrow.png" />
+    <Content Include="Content\Images\t1.jpg" />
+    <Content Include="Content\Images\t2.jpg" />
+    <Content Include="Content\Images\t3.jpg" />
+    <Content Include="Content\Images\t4.jpg" />
+    <Content Include="Content\Images\t5.jpg" />
+    <Content Include="Content\Images\t6.jpg" />
+    <Content Include="Content\Images\uk.png" />
+    <Content Include="Content\Images\us.png" />
+    <Content Include="Content\Images\wish.png" />
+    <Content Include="Content\js\easing.js" />
+    <Content Include="Content\js\jquery.etalage.min.js" />
+    <Content Include="Content\js\jquery.flexisel.js" />
+    <Content Include="Content\js\jquery.jscrollpane.min.js" />
+    <Content Include="Content\js\jquery.min.js" />
+    <Content Include="Content\js\jquery.wmuSlider.js" />
+    <Content Include="Content\js\megamenu.js" />
+    <Content Include="Content\js\move-top.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -229,6 +304,16 @@
     <Content Include="Models\ModelTiendaWeb.edmx.diagram">
       <DependentUpon>ModelTiendaWeb.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\Images\arrows.psd" />
+    <Content Include="Content\Images\fb.psd" />
+    <Content Include="Content\Images\g+.psd" />
+    <Content Include="Content\Images\img-sprite.psd" />
+    <Content Include="Content\Images\logo.psd" />
+    <Content Include="Content\Images\radius.psd" />
+    <Content Include="Content\Images\social.psd" />
+    <Content Include="Content\Images\star.psd" />
+    <Content Include="Content\Images\s_arrow.psd" />
+    <Content Include="Content\Images\tw.psd" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -268,10 +353,11 @@
     <Content Include="Views\Dominios\Edit.cshtml" />
     <Content Include="Views\Dominios\Index.cshtml" />
     <Content Include="Views\Compra\Index.cshtml" />
+    <Content Include="Views\Compra\listarVenta.cshtml" />
+    <Content Include="Views\Compra\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Productos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

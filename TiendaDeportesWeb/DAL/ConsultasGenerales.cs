@@ -116,6 +116,51 @@ namespace TiendaDeportesWeb.DAL
             return lstCategoriasTienda;
         }
 
+        public CarritoDTO getVenta(int? idPer)
+        {
+            CarritoDTO cd = null;
+            List<VentaDTO> lstVenta = null;
+            List<VentaProdutosDTO> lstVentaProdutos = null;
+            
+            using (tiendaEntities db = new tiendaEntities())
+            {
+                lstVenta = (from f in db.VENTAS
+                            where f.ID_PERSONA == idPer
+                               select new VentaDTO
+                               {
+                                   ID_VENTA = f.ID_VENTA,
+                                   FECHA_VENTA = f.FECHA_VENTA,
+                                   VLR_IVA = f.VLR_IVA,
+                                   ID_PERSONA = f.ID_PERSONA,
+                                   TIPO_PERSONA = f.TIPO_PERSONA,
+                                   ESTADO_VENTA = f.ESTADO_VENTA
+                               }).ToList();
+
+                foreach (VentaDTO vd in lstVenta)
+                {
+                    cd = new CarritoDTO();
+                    cd.venta = vd;
+                    //Obtener productos de esa venta
+                    lstVentaProdutos = (from d in db.VENTA_PRODUCTOS
+                                          where d.ID_VENTA == vd.ID_VENTA
+                                          orderby d.ID_PRODUCTO
+                                          select new VentaProdutosDTO
+                                          {
+                                              ID_VENTA_PROD = d.ID_VENTA_PROD,
+                                              ID_VENTA = d.ID_VENTA,
+                                              ID_PRODUCTO = d.ID_PRODUCTO,
+                                              PRECIO_VENTA = d.PRECIO_VENTA,
+                                              CANTIDAD = d.CANTIDAD  
+                                          }).ToList();
+                    cd.lstVentaProductos = lstVentaProdutos;
+                    
+                }
+            }
+            return cd;
+        }
+
+
+
     }
 
 }
