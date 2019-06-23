@@ -12,6 +12,7 @@ namespace TiendaDeportesWeb.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
     
     public partial class tiendaEntities : DbContext
     {
@@ -32,5 +33,22 @@ namespace TiendaDeportesWeb.Models
         public virtual DbSet<PRODUCTOS> PRODUCTOS { get; set; }
         public virtual DbSet<VENTA_PRODUCTOS> VENTA_PRODUCTOS { get; set; }
         public virtual DbSet<VENTAS> VENTAS { get; set; }
+
+        public virtual int PrcAddCarrito(Nullable<int> idProducto, Nullable<decimal> idPersona, string tipoPersona)
+        {
+            var idProductoParameter = idProducto.HasValue ?
+                new ObjectParameter("IdProducto", idProducto) :
+                new ObjectParameter("IdProducto", typeof(int));
+
+            var idPersonaParameter = idPersona.HasValue ?
+                new ObjectParameter("IdPersona", idPersona) :
+                new ObjectParameter("IdPersona", typeof(decimal));
+
+            var tipoPersonaParameter = tipoPersona != null ?
+                new ObjectParameter("TipoPersona", tipoPersona) :
+                new ObjectParameter("TipoPersona", typeof(string));
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PrcAddCarrito", idProductoParameter, idPersonaParameter, tipoPersonaParameter);
+        }
     }
 }
