@@ -100,5 +100,48 @@ namespace TiendaDeportesWeb.DAL
             return lstCategoriasTienda;
         }
 
+        public CarritoDTO getVenta (int? idper)
+        {
+            CarritoDTO ca = null;
+            List<VentaDTO> lstVenta = null;
+            List<VentaProductoDTO> lstVentaProductos = null;
+
+            using (tiendaEntities db = new tiendaEntities())
+            {
+                lstVenta = (from v in db.VENTAS
+                            where v.ID_PERSONA == idper
+                            select new VentaDTO
+                            {
+                                ID_VENTA = v.ID_VENTA,
+                                FECHA_VENTA = v.FECHA_VENTA,
+                                VLR_IVA = v.VLR_IVA,
+                                ID_PERSONA = v.ID_PERSONA,
+                                TIPO_PERSONA =v.TIPO_PERSONA,
+                                ESTADO_VENTA = v.ESTADO_VENTA
+                            
+                            }).ToList();
+                foreach (VentaDTO vd in lstVenta)
+                {
+                    ca = new CarritoDTO();
+                    ca.venta = vd;
+                    lstVentaProductos = (from vp in db.VENTA_PRODUCTOS
+                                         where vp.ID_VENTA == vd.ID_VENTA
+                                         orderby vp.ID_PRODUCTO
+                                         select new VentaProductoDTO
+                                         {
+                                             ID_VENTA_PROD = vp.ID_VENTA_PROD,
+                                             ID_VENTA = vp.ID_VENTA,
+                                             ID_PRODUCTO = vp.ID_PRODUCTO,
+                                             PRECIO_VENTA=vp.PRECIO_VENTA,
+                                             CANTIDAD = vp.CANTIDAD
+                                         
+                                         }).ToList();
+                    ca.LstVentaProductos = lstVentaProductos;
+                }
+
+            }
+            return ca;
+        }
+
     }
 }

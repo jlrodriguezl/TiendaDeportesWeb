@@ -57,6 +57,14 @@ namespace TiendaDeportesWeb.Controllers
                 return Content(e.GetBaseException().ToString());
             }
  
-        }    }
+        }        public ActionResult listarVenta()
+        {
+            con = new ConsultasGenerales();
+            CheckOutDTO ChecOutDTO = new CheckOutDTO();
+            var oPersona = (PERSONAS)System.Web.HttpContext.Current.Session["User"];
+            ChecOutDTO.carrito = con.getVenta(Decimal.ToInt32(oPersona.ID_PERSONA));
+
+            return View(ChecOutDTO);
+        }            }
 
 }
